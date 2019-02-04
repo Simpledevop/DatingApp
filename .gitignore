@@ -4,3 +4,6 @@
 
 /.vs
 /DatingApp.API/.vscode
+/DatingApp.API/bin/Debug/netcoreapp3.0
+/DatingApp.API/obj
+/.vscode
