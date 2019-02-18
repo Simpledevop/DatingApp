@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../_services/auth.service';
 
 // The job of a Component is to provide HTML to our template
 // A Service is a means of prevent duplication, if other components want to call an API to get data then add the method to a service. 
@@ -10,19 +11,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavComponent implements OnInit {
   model: any = {};
-  constructor() { }
+
+  //Inject AuthService into this component
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
   }
 
   login() {
-    console.log(this.model);
+    this.authService.login(this.model).subscribe(next => {
+      console.log("Logged in successfully");
+    }, error => {
+      console.log("Failed to login");
+    });
   }
-
-  getValues() {
-    this.http.get('http://localhost:5000/api/values').subscribe(response => {}
-  }, error => {
-    console.log(error);
-  });
-
 }
