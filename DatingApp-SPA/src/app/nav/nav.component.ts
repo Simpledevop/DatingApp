@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
+import { longStackSupport } from 'q';
 
 // The job of a Component is to provide HTML to our template
 // A Service is a means of prevent duplication, if other components want to call an API to get data then add the method to a service. 
@@ -12,17 +13,28 @@ import { AuthService } from '../_services/auth.service';
 export class NavComponent implements OnInit {
   model: any = {};
 
-  //Inject AuthService into this component
+  // Inject AuthService into this component
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
   }
 
   login() {
+    console.log(this.model);
     this.authService.login(this.model).subscribe(next => {
-      console.log("Logged in successfully");
+      console.log('Logged in successfully');
     }, error => {
-      console.log("Failed to login");
+      console.log('Failed to login');
     });
+  }
+
+  loggedIn() {
+    const token = localStorage.getItem('token');
+    return !!token; // Short hand for if (token != null) {return true}, else {return false};
+  }
+
+  logout() {
+    localStorage.removeItem('token');
+    console.log('logged out');
   }
 }

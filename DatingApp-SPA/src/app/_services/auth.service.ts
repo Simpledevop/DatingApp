@@ -15,13 +15,8 @@ constructor(private http: HttpClient) { }
 login(model: any) { // replicating what we did in postman but in this service
   return this.http.post(this.baseUrl + 'login', model) // Observable - Contstructs Post request
                     // and gets the body of the json response and interprets it as an Object
-    .pipe( // pipe chains functions e.g, pipe(func1, func2)...so one action occurs after the other...and can do a bunch of stuff on the response
-    +
-
-
-
-
-    
+    // tslint:disable-next-line:max-line-length
+    .pipe( // pipe chains functions e.g, pipe(func1, func2)...so one action occurs after the other...and can do a bunch of stuff on the response  
       map((response: any) => {  // map - items emitted by Observable, as they come in ,
                                 // lets us lambda parse into the function..in this case will be just one response
                                 // often map is used on array so can parse the elements as you desire
@@ -29,6 +24,8 @@ login(model: any) { // replicating what we did in postman but in this service
                                 // add to localStorage...it's all done inline, so future self is not confused by this. ;)
         const user = response;
         if (user) {
+          // tslint:disable-next-line:no-debugger
+          debugger;
           localStorage.setItem('token', user.token);
         }
       })
