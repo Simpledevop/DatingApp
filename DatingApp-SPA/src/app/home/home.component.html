@@ -1,0 +1,22 @@
+<!--Bootstrap cointainer provide a bit padding around the content, mt-5 is the margin, t is top and 5 is distance 1-6..for different amounts of space-->
+<div class="container mt-5">
+  <!--Then centering text-->
+  <div *ngIf="!registerMode" style="text-align: center">
+    <h1>Find your match</h1>
+    <!--Bootstrap class lead, gives a bit of styling-->
+    <p class="lead">Come on in to view your matches... All you need to do is sign up!</p>
+    <div class="text-center">
+      <button class="btn btn-primary btn-lg mr-2" (click)="registerToggle()">Register</button>
+      <button class="btn btn-info btn-lg">Learn more</button>
+    </div>
+  </div>
+<!--This container will be used for the Register content-->
+  <div *ngIf="registerMode" class="container">
+    <!--Ensure the 4 columns are centralised on the page -- bootstrap grid is made of 12 columns and we will use 4 here-->
+    <div class="row justify-content-center">
+      <div class="col-4">
+        <app-register></app-register>
+      </div>
+    </div>
+  </div>
+</div>
