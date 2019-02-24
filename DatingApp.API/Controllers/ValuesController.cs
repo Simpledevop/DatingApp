@@ -29,6 +29,7 @@ namespace DatingApp.API.Controllers
         //async lets this method be multithreaded...e.g, synchronous..you know from debugging you call it twice..it waits till you have exited the method (thread is free).
         //async lets multi-calls access it on their own threads - so no blocking ..stream through..instead of queing and waiting for it to complete (e.g, what if had large common computation...then it will belong wait).
         // GET api/values
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> Getvalues()
         {

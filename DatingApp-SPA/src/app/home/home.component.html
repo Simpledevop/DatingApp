@@ -15,8 +15,11 @@
     <!--Ensure the 4 columns are centralised on the page -- bootstrap grid is made of 12 columns and we will use 4 here-->
     <div class="row justify-content-center">
       <div class="col-4">
-        <app-register></app-register>
+        <!-- The way to pass values to a directive is with the square brackets input property and then the variable 'values' passed into it-->
+        <app-register [valuesFromHome]= "values" (cancelRegister)="cancelRegisterMode($event)"></app-register>  <!--The (cancelRegister) is coming Out from Register component to call method on HomeComponent-->
       </div>
     </div>
   </div>
 </div>
+
+<p *ngFor="let value of values">{{value.name}}</p>

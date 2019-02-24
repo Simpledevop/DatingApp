@@ -12,7 +12,7 @@ export class AuthService {
 
 constructor(private http: HttpClient) { }
 
-login(model: any) { // replicating what we did in postman but in this service
+  login(model: any) { // replicating what we did in postman but in this service
   return this.http.post(this.baseUrl + 'login', model) // Observable - Contstructs Post request
                     // and gets the body of the json response and interprets it as an Object
     // tslint:disable-next-line:max-line-length
@@ -30,5 +30,9 @@ login(model: any) { // replicating what we did in postman but in this service
         }
       })
     );
+  }
+
+  register(model: any) {
+    return this.http.post(this.baseUrl + 'register', model);
   }
 }
