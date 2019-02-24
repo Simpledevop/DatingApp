@@ -1,3 +1,4 @@
+using System.Net;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,9 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Http;
+using DatingApp.API.Helpers;
 
 namespace DatingApp.API
 {
@@ -62,6 +66,21 @@ namespace DatingApp.API
             }
             else
             {
+                app.UseExceptionHandler(builder => { //Adds middleware to the pipeline that catches the exception, logs them, but then re-excutes the request in another pipeline
+                        builder.Run(async context => {
+                            context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+
+                            var error = context.Features.Get<IExceptionHandlerFeature>();
+
+                            if (error != null)
+                            {
+                                context.Response.AddApplicationError(error.Error.Message);
+                                //When in production you under Properties -> launchSettings.json -> ASPNETCORE_ENVIRONMENT: Production , instead of Development
+                                //You would not get an error passed out to the Response 'none in Postman or Console of the HttpResponse' to see it do the the line below.
+                                await context.Response.WriteAsync(error.Error.Message); //Writing the error message into the http response aswell.
+                            }
+                        }); 
+                });
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 //app.UseHsts();
             }
