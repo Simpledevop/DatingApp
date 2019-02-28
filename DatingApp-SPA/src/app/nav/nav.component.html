@@ -1,58 +1,55 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">Dating App</a>
+  <div class="container">
+      <a class="navbar-brand" href="#">Dating App</a>
 
-
-  <ul class="navbar-nav mr-auto">
-    <li class="nav-item active">
-      <a class="nav-link" href="#">Matches</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Lists</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link disabled" href="#">Messages</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" (click)="logout()">Logout</a>
-    </li>
-  </ul>
-
-  <!--Structural Directives have * and they change the DOM-->
-  <div *ngIf="loggedIn()" class="dropdown">
-    <a class="dropdown-toggle text-light">
-      Welcome User
-    </a>
-    <div class="dropdown-menu">
-      <a class="dropdown-item" href="#"><i class="fa fa-user"></i>Edit Profile</a>
-      <div class="dropdown-divder"></div>
-      <a class="dropdown-item" href="#"><i class="fa fa-sign-out"></i>Logout</a>
-    </div>
+      <ul *ngIf="loggedIn()" class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Matches</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Lists</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#">Messages</a>
+        </li>
+      </ul>
+    
+      <!--Structural Directives have * and they change the DOM-->
+      <div *ngIf="loggedIn()" class="dropdown" dropdown>
+        <a class="dropdown-toggle text-light" dropdownToggle>
+          Welcome {{authService.decodedToken?.unique_name}}
+        </a>
+        <div class="dropdown-menu" *dropdownMenu mt-3>
+          <a class="dropdown-item" href="#"><i class="fa fa-user"></i>Edit Profile</a>
+          <div class="dropdown-divder"></div>
+          <a class="dropdown-item" (click)="logout()"><i class="fa fa-sign-out"></i>Logout</a>
+        </div>
+      </div>
+    
+      <!--Angular form we get things like:
+        * Change Tracking , so if we update inputs angular is aware we change something
+        * 2 way Binding ,  so if we update something in our componenet or if we update something in our angular form then both sides know about it. 
+        * Validation and Error Handling 
+        ...all out of the box with angular-->
+    
+        <!--Angular gives you Template Forms and Reactive Forms...below example is Template Form as it's considered more simple which is good for this case-->
+    
+        <!--Template Variable is specified with # sign -> then we sign it the ngForm Directive from the Import FormsModule in app.module-->
+        <!--This makes it angular form and has the bullet points we specified above built in-->
+        <!--Can do things like : 
+          Form Valid: {{loginForm.valid}} -- This means has the validator triggered passed in this case it's just the inbuilt required field picked up.
+          Form Touched: {{loginForm.touched}} -- This means the value has changed on clicking out of the textbox
+          Form Dirty: {{loginForm.dirty}}  -- This means has anything been typed whilst in the box 
+          Form Values: {{loginForm.value}} -- THis is just the list of the objects as you type you see the object property will change
+          --on any variable within the form, like:
+          Username Valid: {{username.valid}}
+          Username Touched: {{username.touched}}
+          Username Dirty: {{username.dirty}}
+          Username Values: {{username.values}}  -- This is the individual value in the textbox-->
+      <form *ngIf="!loggedIn()" #loginForm="ngForm" class="form-inline my-2 my-lg-0" (ngSubmit)="login()">
+        <input class="form-control mr-sm-2" type="text" name="username" placeholder="Username" required [(ngModel)]="model.username">
+        <input class="form-control mr-sm-2" type="password" name="password" placeholder="Password" required [(ngModel)]="model.password">
+        <button [disabled]="!loginForm.valid" class="btn btn-success my-2 my-sm-0" type="submit">Login</button>
+      </form>
   </div>
-
-  <!--Angular form we get things like:
-    * Change Tracking , so if we update inputs angular is aware we change something
-    * 2 way Binding ,  so if we update something in our componenet or if we update something in our angular form then both sides know about it. 
-    * Validation and Error Handling 
-    ...all out of the box with angular-->
-
-    <!--Angular gives you Template Forms and Reactive Forms...below example is Template Form as it's considered more simple which is good for this case-->
-
-    <!--Template Variable is specified with # sign -> then we sign it the ngForm Directive from the Import FormsModule in app.module-->
-    <!--This makes it angular form and has the bullet points we specified above built in-->
-    <!--Can do things like : 
-      Form Valid: {{loginForm.valid}} -- This means has the validator triggered passed in this case it's just the inbuilt required field picked up.
-      Form Touched: {{loginForm.touched}} -- This means the value has changed on clicking out of the textbox
-      Form Dirty: {{loginForm.dirty}}  -- This means has anything been typed whilst in the box 
-      Form Values: {{loginForm.value}} -- THis is just the list of the objects as you type you see the object property will change
-      --on any variable within the form, like:
-      Username Valid: {{username.valid}}
-      Username Touched: {{username.touched}}
-      Username Dirty: {{username.dirty}}
-      Username Values: {{username.values}}  -- This is the individual value in the textbox-->
-  <form *ngIf="!loggedIn()" #loginForm="ngForm" class="form-inline my-2 my-lg-0" (ngSubmit)="login()">
-    <input class="form-control mr-sm-2" type="text" name="username" placeholder="Username" required [(ngModel)]="model.username">
-    <input class="form-control mr-sm-2" type="password" name="password" placeholder="Password" required [(ngModel)]="model.password">
-    <button [disabled]="!loginForm.valid" class="btn btn-success my-2 my-sm-0" type="submit">Login</button>
-  </form>
-
 </nav>

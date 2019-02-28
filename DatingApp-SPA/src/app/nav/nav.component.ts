@@ -15,7 +15,7 @@ export class NavComponent implements OnInit {
   model: any = {};
 
   // Inject AuthService into this component
-  constructor(private authService: AuthService, private alertify: AlertifyService) { }
+  constructor(public authService: AuthService, private alertify: AlertifyService) { }
 
   ngOnInit() {
   }
@@ -32,8 +32,10 @@ export class NavComponent implements OnInit {
   }
 
   loggedIn() {
-    const token = localStorage.getItem('token');
-    return !!token; // Short hand for if (token != null) {return true}, else {return false};
+    // const token = localStorage.getItem('token');
+    // return !!token; // Short hand for if (token != null) {return true}, else {return false};
+    // let authService hadnled if loggedIn and we use jwtToken helper librbary to see if it's not expired
+    return this.authService.loggedIn();
   }
 
   logout() {
