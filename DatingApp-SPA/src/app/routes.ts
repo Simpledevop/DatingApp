@@ -6,7 +6,7 @@ import { MembersListComponent } from './members-list/members-list.component';
 
 export const appRoutes: Routes = [
     { path: 'home', component: HomeComponent},
-    { path: 'member', component: MembersListComponent},
+    { path: 'members', component: MembersListComponent},
     { path: 'Messages', component: MessagesComponent},
     { path: 'lists', component: ListsComponent},
     { path: '**', redirectTo: 'home', pathMatch: 'full'}, // Ordering is important with wildcard ** as if it was top of
