@@ -46,7 +46,11 @@ export class ErrorInterceptor implements HttpInterceptor {
 // Tell the ng_module Provider an object with some options how to handle this specific provider. In this case
 // it's a type of Http_Interceptor which intercept http request and detects and custom handles any errors.
 export const ErrorInterceptorProvider = {
-    provide: HTTP_INTERCEPTORS,
-    useClass: ErrorInterceptor,
-    multi: true
+    provide: HTTP_INTERCEPTORS, // Add the class to the Http_Interceptors array, this is angular array of http inteceptor classes that
+    useClass: ErrorInterceptor, // will get fired when a request is called. So by , default yours will just run as added to
+    // provider stack behaviour...e.g. do Http Interception ..e.g, may want to change headers..jwt token in request or response.
+    // Then provider stack behaviour does Dependency Injection of registered interfaces.
+    multi: true  // Tells angular that HTTP_Interceptors may already have a class called ErrorInteceptor...but multi says use last one
+    // registered into the provider.. this is for extending..override existing class.
+    // https://blog.thoughtram.io/angular2/2015/11/23/multi-providers-in-angular-2.html
 };

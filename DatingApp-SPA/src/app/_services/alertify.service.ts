@@ -4,7 +4,7 @@ declare let alertify: any; // Already imported via our angular.json file..this j
 @Injectable({
   providedIn: 'root'
 })
-export class AlertifyService {  // So we can inject this service into componenets to use the different methods here, 
+export class AlertifyService {  // So we can inject this service into componenets to use the different methods here,
 // which are wrappers around existing javascript methods (Alertify)
   constructor() { }
 
