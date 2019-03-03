@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
 import { longStackSupport } from 'q';
 import { AlertifyService } from '../_services/alertify.service';
+import { Router } from '@angular/router';
 
 // The job of a Component is to provide HTML to our template
 // A Service is a means of prevent duplication, if other components want to call an API to get data then add the method to a service. 
@@ -15,7 +16,7 @@ export class NavComponent implements OnInit {
   model: any = {};
 
   // Inject AuthService into this component
-  constructor(public authService: AuthService, private alertify: AlertifyService) { }
+  constructor(public authService: AuthService, private alertify: AlertifyService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -28,6 +29,8 @@ export class NavComponent implements OnInit {
     }, error => {
       this.alertify.error(error);
       console.log(error);
+    }, () => {
+      this.router.navigate(['/members']);
     });
   }
 
@@ -42,5 +45,6 @@ export class NavComponent implements OnInit {
     localStorage.removeItem('token');
     console.log('logged out');
     this.alertify.message('logged out');
+    this.router.navigate(['/home']);
   }
 }

@@ -40,8 +40,12 @@ namespace DatingApp.API
             services.AddMvc().AddNewtonsoftJson();
 
             services.AddCors();
+
+            services.AddTransient<Seeder>(); //Make Seeder class injectable (notice you didn't have to an ISeeder interface, this is spot concrete type and inject instance of concrete type)
+            //We inject into Configure below. 
             
             services.AddScoped<IAuthRepository, AuthRepository>();
+            services.AddScoped<IDatingRepository, DatingRepository>();
 
             //Specify the Authentication Scheme our system is going to use - in this case we say JWT.
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options => {
@@ -58,7 +62,7 @@ namespace DatingApp.API
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, Seeder seeder)
         {
             if (env.IsDevelopment())
             {
@@ -86,6 +90,10 @@ namespace DatingApp.API
             }
 
             //app.UseHttpsRedirection();
+
+            //seeder.SeedUsers();  //Own method to Add random 'User'(s) objects into the database.
+            //Now we have random user data...from running the app...we comment the seeder.SeedUsers...as don't need same data again.
+
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseRouting(routes =>
             {

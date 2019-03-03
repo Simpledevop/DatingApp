@@ -43,6 +43,11 @@ constructor(private http: HttpClient) { }
 
   loggedIn() {
     const token = localStorage.getItem('token');
+    // A Hacker could pretend to have an JWT Token called 'token' in their local storage
+    // and see the menu items, but any Dating App API calls will pass that token
+    // and be decoded and checked if password match up with Hash Password
+    // and the hacker will be prevented from doing anything else...
+    // like even getting data for a page. So this is ok.
     return !this.jwtHelper.isTokenExpired(token);
   }
 }

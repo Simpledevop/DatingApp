@@ -1,6 +1,7 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-primary">
   <div class="container">
-      <a class="navbar-brand" [routerLink]="['/home']">Dating App</a>
+    <!-- Routerlink angular will load that according component -->
+      <a class="navbar-brand" [routerLink]="['/home']">Dating App</a>  
 
       <ul *ngIf="loggedIn()" class="navbar-nav mr-auto">
         <!-- Angular feature - routerLinkActive - lets you add a CSS class to an element when the link's route becomes active-->
