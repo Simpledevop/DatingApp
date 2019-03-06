@@ -21,6 +21,7 @@ using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using DatingApp.API.Helpers;
 using Newtonsoft.Json;
+using AutoMapper;
 
 namespace DatingApp.API
 {
@@ -46,9 +47,7 @@ namespace DatingApp.API
             //.AddNewtonsoftJson()
             .AddJsonOptions(options => options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
 
-        //.AddJsonOptions(
-        //    options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-        //);
+            services.AddAutoMapper();
 
             services.AddTransient<Seeder>(); //Make Seeder class injectable (notice you didn't have to an ISeeder interface, this is spot concrete type and inject instance of concrete type)
             //We inject into Configure below. 
