@@ -18,6 +18,7 @@ import { MembersListComponent } from './members-list/members-list.component';
 import { ListsComponent } from './lists/lists.component';
 import { MessagesComponent } from './messages/messages.component';
 import { AuthGuard } from './_guards/auth.guard';
+import { UserService } from './_services/user.service';
 
 
 
@@ -45,7 +46,8 @@ import { AuthGuard } from './_guards/auth.guard';
       // ThisisavaiableforthisServicetobeInjectedintoanComponent
       ErrorInterceptorProvider,
       AlertifyService,
-      AuthGuard
+      AuthGuard,
+      UserService
    ],
    bootstrap: [
       AppComponent

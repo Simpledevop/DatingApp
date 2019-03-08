@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map} from 'rxjs/operators';
 import {JwtHelperService} from '@auth0/angular-jwt';
+import { environment } from 'src/environments/environment';
 // folder named _services just for preference so it sits just under the app folder and distinguishable away from the component folders.
 // Injectable tells Angular engine that it allows it to be injected into the Component.
 @Injectable({
@@ -9,7 +10,7 @@ import {JwtHelperService} from '@auth0/angular-jwt';
                      // in this case, it's the 'root' module...which would be the app.module.
 })
 export class AuthService {
-  baseUrl = 'http://localhost:5000/api/auth/';
+  baseUrl = environment.apiUrl + 'auth/';
   jwtHelper = new JwtHelperService();
   decodedToken: any;
 
