@@ -47,7 +47,7 @@ import { UserService } from './_services/user.service';
       ErrorInterceptorProvider,
       AlertifyService,
       AuthGuard,
-      UserService
+      UserService,
    ],
    bootstrap: [
       AppComponent

@@ -1,3 +1,12 @@
-<p>
-  members-list works!
-</p>
+<div class="container">
+  <div class="row">
+    <!-- Grid means 12 columns, 
+      on large device each column will take up 2 grids so 6 columns
+      on medium device each column will take up 3 grids so 4 columns,
+      on small device each column will take up 6 grids so 2 columns
+       -->
+    <div class="col-lg-2 col-md-3 col-sm-6">
+      <p *ngFor="let user of users">{{user.KnownAs}}</p>
+    </div> 
+  </div>
+</div>
