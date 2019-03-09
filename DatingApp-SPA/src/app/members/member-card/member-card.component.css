@@ -1,0 +1,41 @@
+.card:hover img{
+    transform: scale(1.2,1.2);
+    transition-duration:500ms;
+    transition-timing-function: ease-out;
+    opacity: 0.7;
+}
+
+.card img{
+    transform: scale(1.0,1.0);
+    transition-duration:500ms;
+    transition-timing-function: ease-out;
+}
+
+.card-img-wrapper{
+    overflow: hidden;
+    /* Relative Positioning: To take an element without removing it from natural flow of page & push or pull it , top , bottom, left, right and doesn't affect anything on the page 
+      so we move it...it may overlay other bits as it acting like nothing change occurred on other elements
+      https://www.youtube.com/watch?v=aFtByxWjfLY*/
+    position: relative; 
+
+    /* Absolute positioning: if you did top:0px , left:0px ot would appear in top left corner, if you did relative top:0, left: 0 it will be exactly where the picture started out on the page*/
+}
+
+.member-icons{
+    position: absolute;
+    bottom: -30%;
+    left: 0;
+    right: 0;
+    margin-right: auto;
+    margin-left: auto;
+    opacity:0;
+}
+
+.card-img-wrapper:hover .member-icons{
+    bottom:0;
+    opacity:1;
+}
+
+.animate{
+    transition: all 0.3s ease-in-out;
+}

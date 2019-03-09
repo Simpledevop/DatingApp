@@ -5,8 +5,9 @@
       on medium device each column will take up 3 grids so 4 columns,
       on small device each column will take up 6 grids so 2 columns
        -->
-    <div class="col-lg-2 col-md-3 col-sm-6">
-      <p *ngFor="let user of users">{{user.KnownAs}}</p>
+    <div *ngFor="let user of users" class="col-lg-2 col-md-3 col-sm-6">
+      <!-- We pass the user object down into our member card component -->
+      <app-member-card [user]="user"></app-member-card>
     </div> 
   </div>
 </div>
