@@ -6,9 +6,10 @@ using DatingApp.API.Dtos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace DatingApp.API.Controllers {
-    //[Authorize]
+    [Authorize]
     [Route ("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase {
@@ -32,6 +33,9 @@ namespace DatingApp.API.Controllers {
             {
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore
             };
+
+           //This make the properties all lowercase as for some reason when in a List they start with camelCase (first Letter caps) and don't want this , we want all lowercase for typescript deserialisation into typscript object types.
+            jsonSerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
 
             var usersJsonSeralized =  JsonConvert.SerializeObject(usersToReturn, jsonSerializerSettings);
             

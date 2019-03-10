@@ -5,6 +5,7 @@ import { ListsComponent } from './lists/lists.component';
 import { MembersListComponent } from './members/members-list/members-list.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { CanActivate } from '@angular/router/src/utils/preactivation';
+import { MemberDetailComponent } from './members/member-detail/member-detail.component';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent},
@@ -17,6 +18,7 @@ export const appRoutes: Routes = [
         canActivate: [AuthGuard],
         children: [ // Array of child roots
             { path: 'members', component: MembersListComponent}, // , canActivate: [AuthGuard]}, -- now a child and handled by dummy root
+            { path: 'members/:id', component: MemberDetailComponent},
             { path: 'messages', component: MessagesComponent},
             { path: 'lists', component: ListsComponent},
         ]

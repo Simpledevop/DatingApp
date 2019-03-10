@@ -5,6 +5,7 @@ import {FormsModule} from '@angular/forms';
 import { BsDropdownModule } from 'ngx-bootstrap';
 import { RouterModule } from '@angular/router';
 import { appRoutes } from './routes';
+import { JwtModule } from '@auth0/angular-jwt';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,6 +21,13 @@ import { MessagesComponent } from './messages/messages.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { UserService } from './_services/user.service';
 import { MemberCardComponent } from './members/member-card/member-card.component';
+import { MemberDetailComponent } from './members/member-detail/member-detail.component';
+
+
+export function tokenGetter() {
+   debugger;
+   return localStorage.getItem('token');
+}
 
 
 
@@ -33,7 +41,8 @@ import { MemberCardComponent } from './members/member-card/member-card.component
       MembersListComponent,
       ListsComponent,
       MessagesComponent,
-      MemberCardComponent
+      MemberCardComponent,
+      MemberDetailComponent
    ],
    imports: [
       BrowserModule,
@@ -41,7 +50,15 @@ import { MemberCardComponent } from './members/member-card/member-card.component
       HttpClientModule,
       FormsModule,
       BsDropdownModule.forRoot(),
-      RouterModule.forRoot(appRoutes) // Add our Routes as the configuration for the setup in RouterModule.
+      RouterModule.forRoot(appRoutes), // Add our Routes as the configuration for the setup in RouterModule.
+      JwtModule.forRoot({  // JwtModule - automatically attaches a Json Wen Token to HttpClient requests
+         config: {
+            tokenGetter, // Pass the token with the request - in this case it is from our localStorage
+            whitelistedDomains: ['localhost:5000'],
+            blacklistedRoutes: ['localhost:5000/api/auth'] // Don't pass the Authorization bearer on login, as we are loging in fresh
+                                                           // when we  call login or register actions.
+         }
+      })
    ],
    providers: [
       AuthService,
