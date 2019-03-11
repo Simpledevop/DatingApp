@@ -6,6 +6,9 @@ import { MembersListComponent } from './members/members-list/members-list.compon
 import { AuthGuard } from './_guards/auth.guard';
 import { CanActivate } from '@angular/router/src/utils/preactivation';
 import { MemberDetailComponent } from './members/member-detail/member-detail.component';
+import { MemberDetailResolver } from './_resolvers/member-detail.resolver';
+import { MemberListResolver } from './_resolvers/member-list-resolver';
+import { AstMemoryEfficientTransformer } from '@angular/compiler';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent},
@@ -17,8 +20,10 @@ export const appRoutes: Routes = [
         runGuardsAndResolvers: 'always', // We've created a Guard so lets use it,
         canActivate: [AuthGuard],
         children: [ // Array of child roots
-            { path: 'members', component: MembersListComponent}, // , canActivate: [AuthGuard]}, -- now a child and handled by dummy root
-            { path: 'members/:id', component: MemberDetailComponent},
+            { path: 'members', component: MembersListComponent, resolve: {users: MemberListResolver}},
+            // , canActivate: [AuthGuard]}, -- now a child and handled by dummy root
+            { path: 'members/:id', component: MemberDetailComponent, resolve: {user: MemberDetailResolver}},
+            // 'resolve' This is how are going to access the data resolved from the route
             { path: 'messages', component: MessagesComponent},
             { path: 'lists', component: ListsComponent},
         ]
