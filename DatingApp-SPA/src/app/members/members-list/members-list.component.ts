@@ -23,7 +23,7 @@ export class MembersListComponent implements OnInit {
       this.users = data.users;
     });
 
-    // this.loadUsers();  //Handles by the Resolver.
+    // this.loadUsers();  //Handles by the Resolver & so can use the ActivateRoute above to fetch from Resolver.
   }
 
   // loadUsers() {

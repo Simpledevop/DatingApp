@@ -9,6 +9,8 @@ import { MemberDetailComponent } from './members/member-detail/member-detail.com
 import { MemberDetailResolver } from './_resolvers/member-detail.resolver';
 import { MemberListResolver } from './_resolvers/member-list-resolver';
 import { AstMemoryEfficientTransformer } from '@angular/compiler';
+import { MemberEditComponent } from './members/member-edit/member-edit.component';
+import { MemberEditResolver } from './_resolvers/member-edit.resolver';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent},
@@ -24,6 +26,7 @@ export const appRoutes: Routes = [
             // , canActivate: [AuthGuard]}, -- now a child and handled by dummy root
             { path: 'members/:id', component: MemberDetailComponent, resolve: {user: MemberDetailResolver}},
             // 'resolve' This is how are going to access the data resolved from the route
+            {path: 'member/edit', component: MemberEditComponent, resolve: {user: MemberEditResolver}},
             { path: 'messages', component: MessagesComponent},
             { path: 'lists', component: ListsComponent},
         ]
