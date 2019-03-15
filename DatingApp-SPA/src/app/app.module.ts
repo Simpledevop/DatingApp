@@ -27,6 +27,7 @@ import { MemberDetailResolver } from './_resolvers/member-detail.resolver';
 import { MemberListResolver } from './_resolvers/member-list-resolver';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { MemberEditResolver } from './_resolvers/member-edit.resolver';
+import { IcMinervaOutComponent } from './members/ic-minerva-out/ic-minerva-out.component';
 
 
 export function tokenGetter() {
@@ -48,7 +49,8 @@ export function tokenGetter() {
       MessagesComponent,
       MemberCardComponent,
       MemberDetailComponent,
-      MemberEditComponent
+      MemberEditComponent,
+      IcMinervaOutComponent
    ],
    imports: [
       BrowserModule,

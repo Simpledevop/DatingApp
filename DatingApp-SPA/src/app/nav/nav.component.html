@@ -30,13 +30,65 @@
     
       <!--Angular form we get things like:
         * Change Tracking , so if we update inputs angular is aware we change something
-        * 2 way Binding ,  so if we update something in our componenet or if we update something in our angular form then both sides know about it. 
+        * 2 way Binding ,  so if we update something in our component or if we update something in our angular form then both sides know about it. 
         * Validation and Error Handling 
         ...all out of the box with angular-->
     
         <!--Angular gives you Template Forms and Reactive Forms...below example is Template Form as it's considered more simple which is good for this case-->
     
-        <!--Template Variable is specified with # sign -> then we sign it the ngForm Directive from the Import FormsModule in app.module-->
+        <!--Template Variable is specified with # sign -> then we assign it the ngForm Directive from the Import FormsModule in app.module-->
+        <!--In the HTML you can declare the following syntax:
+        
+        # - variable declaration
+
+        () - event binding
+
+        [] - property binding
+
+        [()] - two-way property binding
+
+        {{ }} - interpolation
+
+        * - structural directives
+
+        Template reference variables are a little gem that allows to get a lot of nice things done with Angular. I usually call that feature “the hashtag syntax” because, well, it relies on a simple hashtag to create a reference to an element in a template:
+
+        <input #phone placeholder="phone number">
+        What the above syntax does is fairly simple: It creates a reference to the input element that can be used later on in my template. Note that the scope for this variable is the entire HTML template in which the reference is defined.
+
+        Here’s how I could use that reference to get the value of the input, for instance:
+
+        phone refers to the input element
+        <button (click)="callPhone(phone.value)">Call</button>
+        Note that phone refers to the HTMLElement object instance for the input. As a result, phone has all of the properties and methods of any HTMLElement (id, name, innerHTML, value, etc.)
+
+        The above is a nice way to avoid using ngModel or some other kind of data binding in a simple form that does not require much in terms of validation.
+
+        Does this also work with components?
+
+        The answer is YES!
+
+        ... the best part of it is that we’re getting a reference to the actual component instance, HelloWorldComponent, so we can access any methods or properties of that component (even if they are declared as private or protected, which is surprising):
+
+        @Component
+          selector: 'app-hello',
+          // ...
+
+        export class HelloComponent 
+          name = 'Angular';
+
+        [...]
+
+        <app-hello #helloComp></app-hello>
+
+        The following interpolation displays "Angular" 
+        {{helloComp.name}}
+      
+          That's cool and powerful! But remember can also do @Output() onClick = new EventEmitter() to achieve same things in out of the directive
+        
+        e.g
+      
+      -->
         <!--This makes it angular form and has the bullet points we specified above built in-->
         <!--Can do things like : 
           Form Valid: {{loginForm.valid}} -- This means has the validator triggered passed in this case it's just the inbuilt required field picked up.

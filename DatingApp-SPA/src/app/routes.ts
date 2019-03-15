@@ -11,6 +11,7 @@ import { MemberListResolver } from './_resolvers/member-list-resolver';
 import { AstMemoryEfficientTransformer } from '@angular/compiler';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { MemberEditResolver } from './_resolvers/member-edit.resolver';
+import { IcMinervaOutComponent } from './members/ic-minerva-out/ic-minerva-out.component';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent},
@@ -29,6 +30,7 @@ export const appRoutes: Routes = [
             {path: 'member/edit', component: MemberEditComponent, resolve: {user: MemberEditResolver}},
             { path: 'messages', component: MessagesComponent},
             { path: 'lists', component: ListsComponent},
+            { path: 'ic-minerva', component: IcMinervaOutComponent},
         ]
     },
     // redirect to '' will mean redirect to '' above which will take you home component.

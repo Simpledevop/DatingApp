@@ -2,8 +2,9 @@
       <div class="row">
         <div class="col-sm-4"><h1>Your Profile</h1></div>
         <div class="col-sm-8">
-          <div class="alert alert-info">
-            <p><strong>Information:</strong> You have made changes. Any unsaved changes will be lost!</p>
+          <!--Make the alert appear when user has typed in something-->
+          <div *ngIf="editForm.dirty" class="alert alert-info">
+            <strong>Information:</strong> You have made changes. Any unsaved changes will be lost!
           </div>
         </div>        
       </div>
@@ -30,7 +31,8 @@
               </div>
             </div>
             <div class="card-footer">
-                <button class="btn btn-success btn-block">Save Changes</button>
+              <!-- Woah so if you give form an id you can also make dom elements outside the form be part of the Form -->
+                <button [disabled]="!editForm.dirty" form="editForm" class="btn btn-success btn-block">Save Changes</button>
             </div>
           </div>
         </div>
@@ -38,7 +40,8 @@
           <div class="tab-panel">
             <tabset class="member-tabset">
               <tab heading="Edit Profile">
-                <form>
+                <!--Assign a reference variable editForm so has scope to html dom elements inside and also ngForm helper methods...editForm.valid,  introduction.touched, interests.dirty etc-->
+                <form #editForm="ngForm" id="editForm" (ngSubmit)="updateUser()"> 
                     <h4>Description</h4>
                     <textarea name="introduction" rows="6" class="form-control" [(ngModel)]="user.introduction"></textarea>
                     <h4>Looking for</h4>
