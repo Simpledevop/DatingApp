@@ -1,3 +1,5 @@
+using System;
+using System.Security.Claims;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -59,6 +61,33 @@ namespace DatingApp.API.Controllers {
             var userJsonSeralized =  JsonConvert.SerializeObject(userToReturn, jsonSerializerSettings);
             
             return Ok(userToReturn);
+       }
+
+        //Stackoverlow says HTTP Put used when replacing the whole object and HTTP Patch used when updating some data
+       [HttpPut("{id}")]
+       public async Task<IActionResult> UpdateUser(int id, UserForUpdateDto userForUpdateDto)
+       {
+           // Check if the current user has passed the token up to the server and attempting to access this route {id}, doing an httpPut
+           // and if the id doesn't match what's in their token, then return unauthorised.
+           // So the person making the Request has an ID that was issued within the creation of the first JWT token and then token passed to
+           // them after they login. So make sure the ID they want to update is the same as they have (serialised into Claim object) to make sure
+           // the requester can only update their own user.
+           if(id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+           {
+               return Unauthorized();
+           }
+
+           var userFromRepo = await _repo.GetUser(id);
+
+           // This will map dto changes into the entity ( we called it model here)
+            _mapper.Map(userForUpdateDto, userFromRepo);
+
+            if(await _repo.SaveAll())
+            {
+                return NoContent();
+            }
+
+            throw new Exception($"Updating user {id} failed on save");
        }
     }
 }
