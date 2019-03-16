@@ -12,6 +12,7 @@ import { AstMemoryEfficientTransformer } from '@angular/compiler';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { MemberEditResolver } from './_resolvers/member-edit.resolver';
 import { IcMinervaOutComponent } from './members/ic-minerva-out/ic-minerva-out.component';
+import { PreventUnsavedChangesGuard } from './_guards/prevent-unsaved-changes.guard';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent},
@@ -27,7 +28,8 @@ export const appRoutes: Routes = [
             // , canActivate: [AuthGuard]}, -- now a child and handled by dummy root
             { path: 'members/:id', component: MemberDetailComponent, resolve: {user: MemberDetailResolver}},
             // 'resolve' This is how are going to access the data resolved from the route
-            {path: 'member/edit', component: MemberEditComponent, resolve: {user: MemberEditResolver}},
+            {path: 'member/edit', component: MemberEditComponent, resolve: {user: MemberEditResolver},
+                                                                  canDeactivate: [PreventUnsavedChangesGuard]},
             { path: 'messages', component: MessagesComponent},
             { path: 'lists', component: ListsComponent},
             { path: 'ic-minerva', component: IcMinervaOutComponent},
