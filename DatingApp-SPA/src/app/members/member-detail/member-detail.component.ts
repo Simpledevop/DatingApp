@@ -21,6 +21,7 @@ export class MemberDetailComponent implements OnInit {
   ngOnInit() {
     // this.loadUser();  //Now this is handled by MemberDetailResolver
     this.route.data.subscribe(data => {
+      debugger;
       this.user = data.user;
     });
 
@@ -48,8 +49,6 @@ export class MemberDetailComponent implements OnInit {
         big: photo.url,
         description: photo.description,
       });
-      return imageUrls;
-
     // for (let i = 0; i < this.user.photos.length; i++) {
     //   imageUrls.push({
     //     small: this.user.photos[i].url,
@@ -59,6 +58,7 @@ export class MemberDetailComponent implements OnInit {
     //   });
     // return imageUrls;
     }
+    return imageUrls;
   }
 
   // members/4

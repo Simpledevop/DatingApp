@@ -24,5 +24,6 @@ namespace DatingApp.API.Data
                               // if more than one return true, else return false for nothing to save (or something went wrong).
         Task<IEnumerable<User>> GetUsers();
         Task<User> GetUser(int id);
+        Task<Photo> GetPhoto(int id);
     }
 }

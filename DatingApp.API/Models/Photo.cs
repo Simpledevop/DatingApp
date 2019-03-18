@@ -9,6 +9,7 @@ namespace DatingApp.API.Models
         public string Description { get; set; }
         public DateTime DateAdded { get; set; }
         public bool IsMain { get; set; }
+        public string PublicId { get; set; }
 
         //By referencing back to User - EF Convention makes it a cascade delete
         //So when User is deleted the Photos will be deleted.

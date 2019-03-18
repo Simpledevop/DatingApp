@@ -47,6 +47,8 @@ namespace DatingApp.API
             //.AddNewtonsoftJson()
             .AddJsonOptions(options => options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
 
+            services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
+
             services.AddAutoMapper();
 
             services.AddTransient<Seeder>(); //Make Seeder class injectable (notice you didn't have to an ISeeder interface, this is spot concrete type and inject instance of concrete type)
