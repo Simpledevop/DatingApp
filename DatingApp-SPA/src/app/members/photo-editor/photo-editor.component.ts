@@ -37,6 +37,46 @@ export class PhotoEditorComponent implements OnInit {
       autoUpload: false,
       maxFileSize: 10 * 1024 * 1024 // Max file size is 10mb
     });
-  }
 
+    this.uploader.onAfterAddingFile = (file) => {file.withCredentials = false; };
+
+    // New Arrow function of ES6
+    //     That's known as an Arrow Function, part of the ECMAScript 2015 spec...
+    // Like simplier function expressions, used in callback (aka delegates) so instead of function() { }
+    // can do () =>
+    // e.g
+    // setInterval(function () {console.log(this.count++), 1000);
+    // vs etInterval(() => {console.log(this.count++), 1000);
+
+    // e.g
+    // var foo = ['a', 'ab', 'abc'];
+
+    // var bar = foo.map(f => f.length);
+
+    // console.log(bar); // 1,2,3
+    // Shorter syntax than the previous:
+
+    // BEFORE ES6:
+    // var foo = ['a', 'ab', 'abc'];
+
+    // var bar = foo.map(function (f) {
+    //   return f.length;
+    // });
+    // console.log(bar); // 1,2,3
+
+    // if you look at definition this ( ... ) passes the paramaters into a method => then callback
+    this.uploader.onSuccessItem = (item, response, status, headers) => {
+      if (response) {
+        const res: Photo = JSON.parse(response);
+        const photo = {
+          id: res.id,
+          url: res.url,
+          dateAdded: res.dateAdded,
+          description: res.description,
+          isMain: res.isMain
+        };
+        this.photos.push(photo);
+      }
+    }
+  }
 }
