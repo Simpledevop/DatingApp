@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
@@ -8,6 +9,13 @@ import { appRoutes } from './routes';
 import { JwtModule } from '@auth0/angular-jwt';
 import { NgxGalleryModule } from 'ngx-gallery';
 import { FileUploadModule } from 'ng2-file-upload';
+
+import {DataViewModule} from 'primeng/dataview';
+import {DropdownModule} from 'primeng/dropdown';
+import {DialogModule} from 'primeng/dialog';
+import {PanelModule} from 'primeng/panel';
+
+import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -31,6 +39,7 @@ import { MemberEditResolver } from './_resolvers/member-edit.resolver';
 import { IcMinervaOutComponent } from './members/ic-minerva-out/ic-minerva-out.component';
 import { PreventUnsavedChangesGuard } from './_guards/prevent-unsaved-changes.guard';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
+import { MessageService } from 'primeng/components/common/messageservice';
 
 
 
@@ -59,6 +68,7 @@ export function tokenGetter() {
    ],
    imports: [
       BrowserModule,
+      BrowserAnimationsModule,
       AppRoutingModule,
       HttpClientModule,
       FormsModule,
@@ -74,7 +84,13 @@ export function tokenGetter() {
       }),
       TabsModule.forRoot(),
       NgxGalleryModule,
-      FileUploadModule
+      FileUploadModule,
+      DataViewModule,
+      DropdownModule,
+      DialogModule,
+      PanelModule,
+      ProgressbarModule.forRoot(),
+
    ],
    providers: [
       AuthService,
@@ -86,7 +102,8 @@ export function tokenGetter() {
       MemberDetailResolver,
       MemberListResolver,
       MemberEditResolver,
-      PreventUnsavedChangesGuard
+      PreventUnsavedChangesGuard,
+      MessageService
    ],
    bootstrap: [
       AppComponent

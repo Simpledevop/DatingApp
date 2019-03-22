@@ -1,3 +1,52 @@
 <p>
   ic-minerva-out works!
 </p>
+
+<p-dataView #dv [value]="batchCreditSearches" [paginator]="true" [rows]="20" paginatorPosition="both" filterBy="brand"
+    [sortField]="sortField" [sortOrder]="sortOrder" layout="grid">
+    <p-header>
+        <div class="ui-helper-clearfix">
+            <div class="ui-g">
+                <div class="ui-g-12 ui-md-4">
+                    <p-dropdown [options]="sortOptions" [(ngModel)]="sortKey" placeholder="Sort By" (onChange)="onSortChange($event)" [style]="{'min-width':'140px'}"></p-dropdown>
+                </div>
+                <div class="ui-g-6 ui-md-4 filter-container">
+                    <div style="position:relative">
+                        <input type="search" pInputText placeholder="Search by reference" (keyup)="dv.filter($event.target.value)">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </p-header>
+    <ng-template let-batchCreditSearch pTemplate="gridItem">
+        <div style="padding:.5em" class="ui-g-12 ui-md-3">
+            <p-panel [header]="batchCreditSearch.batchId" [style]="{'text-align':'center'}">
+                <!-- <img src="assets/showcase/images/demo/car/{{car.brand}}.png" width="60"> -->
+                <div class="BatchCreditSearch-detail">Reference: {{batchCreditSearch.reference}}</div>
+                <div class="BatchCreditSearch-detail">Created Date: {{batchCreditSearch.createdDate}}</div>
+                <div class="BatchCreditSearch-detail">Started Date: {{batchCreditSearch.startDate}}</div>
+                <div class="BatchCreditSearch-detail">Amount: {{batchCreditSearch.totalAmountOfItems}}</div>
+                <div class="progress">
+                    <progressbar max="{{batchCreditSearch.totalAmountOfItems}}" [value]="batchCreditSearch.amountProcessed" type="success" [striped]="true" [animate]="true"><i>{{batchCreditSearch.amountProcessed}} / {{batchCreditSearch.totalAmountOfItems}}</i></progressbar>
+                  </div>
+                <div class="BatchCreditSearch-detail">% : {{batchCreditSearch.percentageComplete}}</div>
+                <div class="BatchCreditSearch-detail">Completed Date: {{batchCreditSearch.completedDate}}</div>
+                <hr class="ui-widget-content" style="border-top:0">
+                <!-- <button [disabled]="!loginForm.valid" class="btn btn-success my-2 my-sm-0" type="submit">Export</button>  -->
+                <button pButton type="button" class="btn btn-success my-2 my-sm-0"  icon="pi pi-search" (click)="selectBatch($event, batchCreditSearch)" style="margin-top:0">Export</button>
+            </p-panel>
+        </div>
+    </ng-template>
+</p-dataView>
+
+<p-dialog header="Batch Search Details" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" [style]="{width: '225px'}"  (onAfterHide)="onDialogHide()">
+    <div class="ui-g" *ngIf="selectedBatchCreditSearch">
+        <div class="ui-g-12" style="text-align:center">
+            
+            <!-- <img src="assets/showcase/images/demo/car/{{batchCreditSearch.brand}}.png"> -->
+        </div>
+        
+        <div class="ui-g-4">BatchId: </div>
+        <div class="ui-g-8">{{selectedBatchCreditSearch.batchId}}</div>
+    </div>
+</p-dialog>
