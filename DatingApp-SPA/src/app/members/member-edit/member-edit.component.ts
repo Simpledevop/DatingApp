@@ -63,4 +63,10 @@ export class MemberEditComponent implements OnInit {
       this.alertify.error(error);
     });
   }
+
+  // So when the photo is changed in the child component it is emited up to this component and this method is called
+  // to change the user photo on screen.
+  updateMainPhoto(photoUrl) {
+    this.user.photoUrl = photoUrl;
+  }
 }
