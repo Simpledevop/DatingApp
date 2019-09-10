@@ -44,7 +44,8 @@ export class AuthService {
   changeMemberPhoto(photoUrl: string){
     // the behaviourSubject has a next method, we pass it a value and this will update the photoUrl
     // so instead of the photourl being the user.png photo
-    this.photoUrl.next('photoUrl');
+    this.photoUrl.next(photoUrl);
+    debugger;
   }
 
   login(model: any) { // replicating what we did in postman but in this service

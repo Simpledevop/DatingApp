@@ -28,6 +28,7 @@ export class MemberEditComponent implements OnInit {
   // }
   @ViewChild('editForm') editForm: NgForm;
   user: User;
+  photoUrl: string;
   // Hostlistener listen to the browser and take action based on something that happens in the browser
   // In this case before the page is unloaded (clicked on x in tab or browser refreshes), then check if form is dirty
   // and show call unload notification which prompts changes maybe lost.
@@ -43,13 +44,15 @@ export class MemberEditComponent implements OnInit {
     }
   }
 
-  constructor(private route: ActivatedRoute, private alertify: AlertifyService, private userService: UserService, private authService: AuthService) { }
+  constructor(private route: ActivatedRoute, private alertify: AlertifyService,
+              private userService: UserService, private authService: AuthService) { }
 
   ngOnInit() {
     debugger;
     this.route.data.subscribe(data => {
       this.user = data.user;
     });
+    this.authService.currentPhotoUrl.subscribe(photoUrl => this.photoUrl = photoUrl);
   }
 
   updateUser() {
